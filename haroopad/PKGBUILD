@@ -6,7 +6,7 @@
 pkgname=haroopad
 pkgver=0.13.2
 pkgrel=1
-pkgdesc="A markdown enabled document processor. New pre-release v0.13.2 (https://github.com/rhiokim/haroopad/issues/569#issuecomment-192540113)"
+pkgdesc="A markdown enabled document processor. v0.13.2 pre-release (https://github.com/rhiokim/haroopad/issues/569#issuecomment-192540113)"
 arch=('i686' 'x86_64')
 url="http://pad.haroopress.com/"
 changelog='changelog'
