@@ -1,4 +1,8 @@
 # PKGBUILDs for [Arch User Repository](https://aur.archlinux.org)
+Scripts modified for the systems I handle (e.g. newer version, lighter flavor) and/or for AUR.
+
+Upstream compatibility preserved unless stated in the PKGBUILD desc.
+
 Includes control scripts for managing AUR packages.
 Requires @falconindy's [pkgbuild-introspection](https://www.archlinux.org/packages/community/any/pkgbuild-introspection) tools to auto-generate .SRCINFO
 
