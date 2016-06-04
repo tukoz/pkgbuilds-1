@@ -2,7 +2,7 @@
 # Contrubutor: raininja <raijin@rai.ninja>
 
 pkgname=slimjet
-pkgver=10.0.2.0
+pkgver=10.0.5.0
 pkgrel=1
 pkgdesc="Fast, smart and powerful browser based on Blink"
 arch=('i686' 'x86_64')
@@ -17,22 +17,22 @@ options=('!emptydirs' '!strip')
 _channel=release
 source_i686=("${pkgname}-${pkgver}_i386.deb::http://www.slimjet.com/${_channel}/${pkgname}_i386.deb")
 source_x86_64=("${pkgname}-${pkgver}_amd64.deb::http://www.slimjet.com/{$_channel}/${pkgname}_amd64.deb")
-sha512sums_i686=('2152efee199013e60e49d66481f29beb6df66a2718209841711266602fe70c4a410f51b0aacda3c4df91cb7286298d76ebc2f65dfe230d8122a02b642c9d6f7b')
-sha512sums_x86_64=('87fe894c96a32cdee8bc338cdaf749519e985561ab4c54e42bd432f4a5b412c271e5a3d4369a4cfd65470a549c7e132f6e2a22584fab9d9b29bab206f756fcea')
+/bin/bash: q : commande introuvable
+md5sums_x86_64=('198c9617532922848fa6918c010f2ce3')
 
 package() {
-    msg2 "Extracting the data.tar.xz..."
-    tar -xf data.tar.xz -C "$pkgdir/"
-
+    msg2 "Extracting the data.tar.lzma..."
+    bsdtar -xf data.tar.xz -C "$pkgdir/"
+    
     msg2 "Correcting permissions..."
     chmod -R 0755 "$pkgdir/"
-
+    
     _crypto_files="libnspr4.so.0d libplds4.so.0d libplc4.so.0d libssl3.so.1d libnss3.so.1d libsmime3.so.1d libnssutil3.so.1d"
     _libdir="/usr/lib"
 
     add_crypto_symlinks() {
-
-      for f in $_crypto_files; do
+    
+      for f in $_crypto_files; do 
         target=$(echo $f | sed 's/.[01]d$//')
         if [ -f "/$_libdir/$target" ]; then
             ln -snf "/$_libdir/$target" "$pkgdir/opt/slimjet/$f"
@@ -41,19 +41,19 @@ package() {
         fi
         done
     }
-
+    
     # Arch has  libudev.so.1, slimjet wants .0
     _libudev_0=libudev.so.0
     _libudev_1=libudev.so.1
-
+    
     add_udev_symlinks() {
     ln -snf "/$_libdir/$_libudev_1" "$pkgdir/opt/slimjet/$_libudev_0"
     }
-
+    
     msg2 "Adding udev and crypto symlinks..."
     add_udev_symlinks
     add_crypto_symlinks
-
+    
     msg2 "Adding Icons..."
     for i in 16x16 22x22 24x24 32x32 48x48 64x64 128x128 256x256; do
         install -Dm644 "$pkgdir"/opt/slimjet/product_logo_${i/x*}.png \
